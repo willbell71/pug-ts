@@ -1,8 +1,11 @@
 let getPath: string;
 let getCallback: (req: object, res: object) => void;
 jest.mock('express', () => {
-  const use: jest.Mock = jest.fn().mockImplementation(() => {});
-  const get: jest.Mock = jest.fn().mockImplementation((path: string, cb: (req: object, res: object) => void) => { getPath = path; getCallback = cb; });
+  const use: jest.Mock = jest.fn();
+  const get: jest.Mock = jest.fn().mockImplementation((path: string, cb: (req: object, res: object) => void) => {
+    getPath = path;
+    getCallback = cb;
+  });
   const Router: jest.Mock = jest.fn().mockImplementation(() => ({
     get
   }));
@@ -25,7 +28,7 @@ import * as express from 'express';
 import { ILogger } from '../../services/logger/ilogger';
 import { ILogLine } from '../../services/logger/ilog-line';
 import { Logger } from '../../services/logger/logger';
-import { ExpressHomeController } from "./express-home-controller";
+import { ExpressHomeController } from './express-home-controller';
 
 let logLineSpy: jest.Mock;
 let warnLineSpy: jest.Mock;
@@ -38,10 +41,10 @@ let assert: ILogLine;
 let logger: ILogger;
 let expressHomeController: ExpressHomeController;
 beforeEach(() => {
-  logLineSpy = jest.fn().mockImplementation(() => {});
-  warnLineSpy = jest.fn().mockImplementation(() => {});
-  errorLineSpy = jest.fn().mockImplementation(() => {});
-  assertLineSpy = jest.fn().mockImplementation(() => {});
+  logLineSpy = jest.fn();
+  warnLineSpy = jest.fn();
+  errorLineSpy = jest.fn();
+  assertLineSpy = jest.fn();
 
   log = {log: logLineSpy};
   warn = {log: warnLineSpy};
@@ -75,13 +78,13 @@ describe('express-home-controller', () => {
     });
 
     it('should set path for get', () => {
-      const router: express.Router = expressHomeController.registerHandlers();
+      expressHomeController.registerHandlers();
 
       expect(getPath).toEqual('/');
     });
 
     it('should call render on get', () => {
-      const router: express.Router = expressHomeController.registerHandlers();
+      expressHomeController.registerHandlers();
 
       const render: jest.Mock = jest.fn();
       getCallback({}, {

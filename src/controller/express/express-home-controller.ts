@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Request, Response, Router } from 'express';
 
 import { ILogger } from '../../services/logger/ilogger';
 import { IServerRouteHandler } from '../../services/server/iserver-route-handler';
@@ -21,7 +21,7 @@ export class ExpressHomeController implements IServerRouteHandler<Router> {
   public registerHandlers(): Router {
     const router: Router = Router();
 
-    router.get('/', (req, res) => res.render('home'));
+    router.get('/', (req: Request, res: Response) => res.render('home'));
 
     return router;
   }

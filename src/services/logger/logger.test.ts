@@ -217,6 +217,7 @@ describe('Logger', () => {
       const localLogger: Logger = new Logger(logLine, otherLogLine, otherLogLine, otherLogLine);
       localLogger.setLevel(ELoggerLevel.ALL);
 
+      /* eslint-disable-next-line @typescript-eslint/no-empty-function */
       localLogger._write('test', 'utf8', () => {});
 
       expect(logLine.log).toHaveBeenCalledTimes(1);
@@ -234,6 +235,7 @@ describe('Logger', () => {
       const localLogger: Logger = new Logger(logLine, otherLogLine, otherLogLine, otherLogLine);
       localLogger.setLevel(ELoggerLevel.NONE);
 
+      /* eslint-disable-next-line @typescript-eslint/no-empty-function */
       localLogger._write('test', 'utf8', () => {});
 
       expect(logLine.log).toHaveBeenCalledTimes(0);
