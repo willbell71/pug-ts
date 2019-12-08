@@ -1,2 +1,2 @@
-*,*::before,*::after{-webkit-box-sizing:border-box;box-sizing:border-box;margin:0;padding:0}body{background-color:#333;color:#fff}
+*,*::before,*::after{-webkit-box-sizing:border-box;box-sizing:border-box;margin:0;padding:0}body{background-color:#333;color:#fff;font-family:sans-serif}.four-oh-four{padding-top:33vh;padding-left:10vw}.code{color:red;margin-right:4px}.message{font-size:1rem}
 /*# sourceMappingURL=styles.min.css.map */

@@ -12,4 +12,7 @@ $color-white: #fff;
 body {
   background-color: $color-dark;
   color: $color-white;
+  font-family: sans-serif;
 }
+
+@import 'four-oh-four';

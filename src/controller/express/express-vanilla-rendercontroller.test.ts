@@ -28,7 +28,7 @@ import * as express from 'express';
 import { ILogger } from '../../services/logger/ilogger';
 import { ILogLine } from '../../services/logger/ilog-line';
 import { Logger } from '../../services/logger/logger';
-import { ExpressHomeController } from './express-home-controller';
+import { ExpressVanillaRenderController } from './express-vanilla-render-controller';
 
 let logLineSpy: jest.Mock;
 let warnLineSpy: jest.Mock;
@@ -39,7 +39,7 @@ let warn: ILogLine;
 let error: ILogLine;
 let assert: ILogLine;
 let logger: ILogger;
-let expressHomeController: ExpressHomeController;
+let expressVanillaRenderController: ExpressVanillaRenderController;
 beforeEach(() => {
   logLineSpy = jest.fn();
   warnLineSpy = jest.fn();
@@ -53,38 +53,38 @@ beforeEach(() => {
   logger = new Logger(log, warn, error, assert);
 
 
-  expressHomeController = new ExpressHomeController(logger);
+  expressVanillaRenderController = new ExpressVanillaRenderController(logger, 'template');
 });
 afterEach(() => jest.clearAllMocks());
 
 describe('express-home-controller', () => {
   describe('registerHandlers', () => {
     it('should create a router', () => {
-      expressHomeController.registerHandlers();
+      expressVanillaRenderController.registerHandlers();
 
       expect(express.Router).toHaveBeenCalled();
     });
 
     it('should register a get route', () => {
-      expressHomeController.registerHandlers();
+      expressVanillaRenderController.registerHandlers();
 
       expect(express.Router().get).toHaveBeenCalled();
     });
 
     it('should return router', () => {
-      const router: express.Router = expressHomeController.registerHandlers();
+      const router: express.Router = expressVanillaRenderController.registerHandlers();
 
       expect(router).toBeTruthy();
     });
 
     it('should set path for get', () => {
-      expressHomeController.registerHandlers();
+      expressVanillaRenderController.registerHandlers();
 
       expect(getPath).toEqual('/');
     });
 
     it('should call render on get', () => {
-      expressHomeController.registerHandlers();
+      expressVanillaRenderController.registerHandlers();
 
       const render: jest.Mock = jest.fn();
       getCallback({}, {
@@ -92,7 +92,7 @@ describe('express-home-controller', () => {
       });
 
       expect(render).toHaveBeenCalledTimes(1);
-      expect(render).toHaveBeenCalledWith('home');
+      expect(render).toHaveBeenCalledWith('template');
     });
   });
 });
