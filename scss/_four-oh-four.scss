@@ -1,13 +1,12 @@
 .four-oh-four {
-  padding-top: 33vh;
-  padding-left: 10vw;
+  padding: 33vh 10vw;
 }
 
-.code {
+.four-oh-four__code {
   color: red;
   margin-right: 4px;
 }
 
-.message {
+.four-oh-four__message {
   font-size: 1rem;
 }

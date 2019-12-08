@@ -52,8 +52,8 @@ server.registerViewEngine(path.join(__dirname, '..', 'views'), 'pug');
 server.registerStaticPath(path.join(__dirname, '..', 'public'));
 
 // register routes
-server.registerRoute('/', new ExpressVanillaRenderController(logger, 'home'));
-server.registerRoute('*', new ExpressVanillaRenderController(logger, 'four-oh-four'));
+server.registerRoute('/', new ExpressVanillaRenderController(logger, 'home', 'Home'));
+server.registerRoute('*', new ExpressVanillaRenderController(logger, 'four-oh-four', '404 - Not Found'));
 
 // start server
 server.start(logger, config.port);

@@ -53,7 +53,7 @@ beforeEach(() => {
   logger = new Logger(log, warn, error, assert);
 
 
-  expressVanillaRenderController = new ExpressVanillaRenderController(logger, 'template');
+  expressVanillaRenderController = new ExpressVanillaRenderController(logger, 'template', 'title');
 });
 afterEach(() => jest.clearAllMocks());
 
@@ -92,7 +92,7 @@ describe('express-home-controller', () => {
       });
 
       expect(render).toHaveBeenCalledTimes(1);
-      expect(render).toHaveBeenCalledWith('template');
+      expect(render).toHaveBeenCalledWith('template', {pageTitle: 'title'});
     });
   });
 });
