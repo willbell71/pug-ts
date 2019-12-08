@@ -3,15 +3,18 @@ import { Request, Response, Router } from 'express';
 import { ILogger } from '../../services/logger/ilogger';
 import { IServerRouteHandler } from '../../services/server/iserver-route-handler';
 
-export class ExpressHomeController implements IServerRouteHandler<Router> {
+export class ExpressVanillaRenderController implements IServerRouteHandler<Router> {
   private logger: ILogger;
+  private template: string;
 
   /**
    * Constructor.
    * @param {ILogger} logger - logger service provider.
+   * @param {string} template - template to render for GET request to /.
    */
-  public constructor(logger: ILogger) {
+  public constructor(logger: ILogger, template: string) {
     this.logger = logger;
+    this.template = template;
   }
 
   /**
@@ -21,7 +24,7 @@ export class ExpressHomeController implements IServerRouteHandler<Router> {
   public registerHandlers(): Router {
     const router: Router = Router();
 
-    router.get('/', (req: Request, res: Response) => res.render('home'));
+    router.get('/', (req: Request, res: Response) => res.render(this.template));
 
     return router;
   }

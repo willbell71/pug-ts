@@ -20,7 +20,7 @@ import { IServerService } from './services/server/iserver-service';
 
 import { ExpressServer } from './services/server/express-server/express-server';
 
-import { ExpressHomeController } from './controller/express/express-home-controller';
+import { ExpressVanillaRenderController } from './controller/express/express-vanilla-render-controller';
 
 // create logger
 const logger: ILogger = new Logger(new LogLineConsoleLog(),
@@ -52,7 +52,8 @@ server.registerViewEngine(path.join(__dirname, '..', 'views'), 'pug');
 server.registerStaticPath(path.join(__dirname, '..', 'public'));
 
 // register routes
-server.registerRoute('/', new ExpressHomeController(logger));
+server.registerRoute('/', new ExpressVanillaRenderController(logger, 'home'));
+server.registerRoute('*', new ExpressVanillaRenderController(logger, 'four-oh-four'));
 
 // start server
 server.start(logger, config.port);
