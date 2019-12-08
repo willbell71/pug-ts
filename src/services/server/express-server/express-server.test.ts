@@ -12,9 +12,9 @@ jest.mock('http', () => {
 import * as http from 'http';
 
 jest.mock('express', () => {
-  const use: jest.Mock = jest.fn().mockImplementation(() => {});
-  const set: jest.Mock = jest.fn().mockImplementation(() => {});
-  const Router: jest.Mock = jest.fn().mockImplementation(() => {});
+  const use: jest.Mock = jest.fn();
+  const set: jest.Mock = jest.fn();
+  const Router: jest.Mock = jest.fn();
   const fakeStatic: jest.Mock = jest.fn().mockImplementation(() => 'fakeStatic');
 
   type FakeExpress = {
@@ -51,10 +51,10 @@ let assert: ILogLine;
 let logger: ILogger;
 let server: ExpressServer;
 beforeEach(() => {
-  logLineSpy = jest.fn().mockImplementation(() => {});
-  warnLineSpy = jest.fn().mockImplementation(() => {});
-  errorLineSpy = jest.fn().mockImplementation(() => {});
-  assertLineSpy = jest.fn().mockImplementation(() => {});
+  logLineSpy = jest.fn();
+  warnLineSpy = jest.fn();
+  errorLineSpy = jest.fn();
+  assertLineSpy = jest.fn();
 
   log = {log: logLineSpy};
   warn = {log: warnLineSpy};
@@ -74,6 +74,7 @@ afterEach(() => {
 describe('ExpressServer', () => {
   describe('registerMiddleware', () => {
     it('should call app use', () => {
+      /* eslint-disable-next-line @typescript-eslint/no-empty-function */
       server.registerMiddleware(() => {});
 
       expect(express().use).toHaveBeenCalledTimes(1);
