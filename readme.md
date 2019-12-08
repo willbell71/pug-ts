@@ -3,7 +3,7 @@
 Renders PUG templates for endpoints.
 
 / - renders home template.
-
+* - renders 404 template.
 
 ## Build Docker image
 
