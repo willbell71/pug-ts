@@ -16,6 +16,8 @@ import { LogLineConsoleLog } from './services/logger/log-line-console-log';
 import { LogLineConsoleWarn } from './services/logger/log-line-console-warn';
 import { LogLineConsoleError } from './services/logger/log-line-console-error';
 
+import { ShutdownHandler } from './services/shutdown/shutdown-handler';
+
 import { IServerService } from './services/server/iserver-service';
 
 import { ExpressServer } from './services/server/express-server/express-server';
@@ -29,6 +31,9 @@ const logger: ILogger = new Logger(new LogLineConsoleLog(),
   new LogLineConsoleError());
 logger.setLevel(ELoggerLevel[config.logLevel as keyof typeof ELoggerLevel]);
 logger.info('App', `running in mode: ${config.mode}`);
+
+// create shutdown handler
+new ShutdownHandler(logger);
 
 // create server
 const server: IServerService<RequestHandler, Router> = new ExpressServer();
