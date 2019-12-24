@@ -176,7 +176,7 @@ describe('request', () => {
       }, expect.any(Function));
     });
 
-    it('should resolve on end with response', (done: jest.DoneCallback) => {
+    it('should resolve on end with JSON response', (done: jest.DoneCallback) => {
       request.send(new URL('http://host:80/path'))
         .then((data: string) => {
           expect(data).toEqual({data: 'one'});
@@ -189,6 +189,24 @@ describe('request', () => {
         mockHttpCallback(res as unknown as http.IncomingMessage);
         res.emit('data', '{"data": ');
         res.emit('data', '"one"}');
+        res.emit('end');
+      } else {
+        done('Failed to catch mock callback');
+      }
+    });
+
+    it('should resolve on end with string response', (done: jest.DoneCallback) => {
+      request.send(new URL('http://host:80/path'))
+        .then((data: string) => {
+          expect(data).toEqual('Hello World');
+          done();    
+        })
+        .catch(() => done('Invoked catch block'));
+
+      if (mockHttpCallback) {
+        const res: MockResponse = new MockResponse();
+        mockHttpCallback(res as unknown as http.IncomingMessage);
+        res.emit('data', 'Hello World');
         res.emit('end');
       } else {
         done('Failed to catch mock callback');
