@@ -1,15 +1,23 @@
+import http from 'http';
+import express from 'express';
+
+import { ExpressServer } from './express-server';
+
+import { ILogLine } from '../../logger/ilog-line';
+import { ILogger } from '../../logger/ilogger';
+import { Logger } from '../../logger/logger';
+
 jest.mock('http', () => {
   const listen: jest.Mock = jest.fn().mockImplementation((port: number, cb: () => void) => cb());
-  
+
   const createServer: jest.Mock = jest.fn().mockImplementation(() => ({
     listen
   }));
-    
+
   return {
     createServer
   };
 });
-import * as http from 'http';
 
 jest.mock('express', () => {
   const use: jest.Mock = jest.fn();
@@ -21,24 +29,17 @@ jest.mock('express', () => {
     Router: jest.Mock;
   };
 
-  const express: unknown = jest.fn().mockImplementation(() => ({
+  const exp: unknown = jest.fn().mockImplementation(() => ({
     use,
     set,
     Router
   }));
 
-  (express as FakeExpress).Router = Router;
-  (express as {static: jest.Mock})['static'] = fakeStatic;
+  (exp as FakeExpress).Router = Router;
+  (exp as {static: jest.Mock})['static'] = fakeStatic;
 
-  return express;
+  return exp;
 });
-import * as express from 'express';
-
-import { ExpressServer } from './express-server';
-
-import { ILogLine } from '../../logger/ilog-line';
-import { ILogger } from '../../logger/ilogger';
-import { Logger } from '../../logger/logger';
 
 let logLineSpy: jest.Mock;
 let warnLineSpy: jest.Mock;

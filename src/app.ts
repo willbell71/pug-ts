@@ -1,13 +1,13 @@
-import * as path from 'path';
+import path from 'path';
 
 import { config } from './config/config';
 
-import { RequestHandler, Router } from 'express';
-import * as helmet from 'helmet';
-import * as compression from 'compression';
-import * as morgan from 'morgan';
-import * as bodyParser from 'body-parser';
-import * as cors from 'cors';
+import { RequestHandler, Router, Request, Response } from 'express';
+import helmet from 'helmet';
+import compression from 'compression';
+import morgan from 'morgan';
+import bodyParser from 'body-parser';
+import cors from 'cors';
 
 import { Logger } from './services/logger/logger';
 import { ILogger } from './services/logger/ilogger';
@@ -43,7 +43,7 @@ if (config.useCompression) {
   logger.info('App', 'Compression middleware enabled');
   server.registerMiddleware(compression());
 }
-server.registerMiddleware(morgan('dev', {stream: logger} as unknown as morgan.Options));
+server.registerMiddleware(morgan('dev', {stream: logger} as unknown as morgan.Options<Request, Response>));
 server.registerMiddleware(bodyParser.urlencoded({extended: true}));
 server.registerMiddleware(bodyParser.text());
 server.registerMiddleware(bodyParser.json({type: 'application/json'}));

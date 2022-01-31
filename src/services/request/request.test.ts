@@ -1,5 +1,5 @@
-import * as http from 'http';
-import * as https from 'https';
+import http from 'http';
+import https from 'https';
 import { URL } from 'url';
 import { EventEmitter } from 'events';
 
@@ -180,7 +180,7 @@ describe('request', () => {
       request.send(new URL('http://host:80/path'))
         .then((data: string) => {
           expect(data).toEqual({data: 'one'});
-          done();    
+          done();
         })
         .catch(() => done('Invoked catch block'));
 
@@ -199,7 +199,7 @@ describe('request', () => {
       request.send(new URL('http://host:80/path'))
         .then((data: string) => {
           expect(data).toEqual('Hello World');
-          done();    
+          done();
         })
         .catch(() => done('Invoked catch block'));
 

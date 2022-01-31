@@ -1,4 +1,4 @@
-import * as process from 'process';
+import process from 'process';
 import { Writable } from 'stream';
 
 import { ILogger } from './ilogger';
@@ -64,7 +64,7 @@ export class Logger extends Writable implements ILogger {
       }
     }
   }
- 
+
   /**
    * Get current stack.
    * @return {string[]} current stack, one line per call, starting will function that called this
@@ -78,7 +78,7 @@ export class Logger extends Writable implements ILogger {
       // tidy line, just want function, file and line
       .map((line: string) => line.replace(/\s{4}at\s/, ''));
   }
- 
+
   /**
    * Set current log level.
    * @param {ELoggerLevel} level - new log level
