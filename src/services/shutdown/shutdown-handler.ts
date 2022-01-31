@@ -1,4 +1,4 @@
-import * as process from 'process';
+import process from 'process';
 
 import { ILogger } from '../logger/ilogger';
 import { IShutdownHandler } from './ishutdown-handler';
@@ -29,7 +29,7 @@ export class ShutdownHandler implements IShutdownHandler {
    * Clean up and exit handler.
    */
   private async cleanUpAndExitHandler(): Promise<void> {
-    this.logger.debug('Shutdown Handler', `Invoking any shutdown callbacks that have been registered ( ${this.callbackList.length} )`);    
+    this.logger.debug('Shutdown Handler', `Invoking any shutdown callbacks that have been registered ( ${this.callbackList.length} )`);
     // call shut down callback
     const promiseList: Promise<void>[] = this.callbackList.map((handler: TShutdownCallback) => handler(this));
     // wait for all handlers to finish
